@@ -1,5 +1,8 @@
 const express = require('express');
 const authController = require('../controllers/auth');
+const vehicleController = require('../controllers/vehicle');
+const vehicleListingController = require('../controllers/vehicleListing');
+const serviceController = require('../controllers/service');
 
 const router = express.Router();
 
@@ -8,11 +11,11 @@ router.post('/register', authController.register);
 
 router.post('/login', authController.login);
 
-router.post('/deleteMachine', authController.deleteMachine);
+router.post('/deleteMachine', vehicleController.deleteMachine);
 
-router.post('/service', authController.service);
+router.post('/service', serviceController.service);
 
-router.post('/editMachine', authController.editMachineEdit)
+router.post('/editMachine', vehicleController.editMachineEdit)
 
 //router.post('/service', authController.servicePost)
 
@@ -21,9 +24,9 @@ router.post('/editMachine', authController.editMachineEdit)
     var vehicleID = req.body.vehicleID;
     res.redirect("/editMachine/" + vehicleID) 
 });*/
-router.post('/createMachine', authController.createMachine);
+router.post('/createMachine', vehicleController.createMachine);
 
-router.post('/fleet', function (req, res) {authController.fleet});
+router.post('/fleet', function (req, res) {vehicleListingController.fleet});
 
 router.post('/vehicle', function (req, res, next){
     var vehicleID = req.body.vehicleID;

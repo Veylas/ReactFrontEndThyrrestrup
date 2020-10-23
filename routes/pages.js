@@ -1,5 +1,8 @@
 const express = require('express');
 const authController = require('../controllers/auth');
+const vehicleController = require('../controllers/vehicle');
+const serviceController = require('../controllers/service');
+const vehicleListingController = require('../controllers/vehicleListing');
 
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
@@ -12,13 +15,13 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('index');
 });
-router.get('/deleteMachine/:vehicleID', authController.isUserOwner, authController.deleteMachine, (req, res, next) => {
+router.get('/deleteMachine/:vehicleID', authController.isUserOwner, vehicleController.deleteMachine, (req, res, next) => {
     res.render('deleteMachine')
 });
 router.get('/createMachine', (req, res) => {
     res.render('createMachine');
 });
-router.get('/editMachine/:vehicleID', authController.isUserOwner, authController.editMachineLoad, (req, res, next) => {
+router.get('/editMachine/:vehicleID', authController.isUserOwner, vehicleController.editMachineLoad, (req, res, next) => {
     res.render('editMachine')
 });
 
@@ -27,7 +30,7 @@ router.get('/register', (req, res) => {
     res.render('register');
 });
 
-router.get('/service/:vehicleID', authController.isUserOwner, authController.serviceLoad, (req, res, next) => {
+router.get('/service/:vehicleID', authController.isUserOwner, serviceController.serviceLoad, (req, res, next) => {
     res.render('service')
 });
 
@@ -45,7 +48,7 @@ router.get('/contact', function (req, res, next) {
 });
 
 // fleet is rendered
-router.get('/fleet', authController.fleet, (req, res, next) => {
+router.get('/fleet', vehicleListingController.fleet, (req, res, next) => {
     axios.get('fleet')
     .then(response => {
       res.send(response.data);
@@ -53,7 +56,7 @@ router.get('/fleet', authController.fleet, (req, res, next) => {
 });
 
 // The router for vehicle is defined, now it can be used to get information to the page
-router.get('/vehicle/:vehicleID', authController.isUserOrOwner, authController.vehicle, (req, res, next) => {
+router.get('/vehicle/:vehicleID', authController.isUserOrOwner, vehicleListingController.vehicle, (req, res, next) => {
     res.render('vehicle')
 });
 module.exports = router;
