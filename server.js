@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-const routes = require('./routes/api')
 const mssql = require("mssql");
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
@@ -30,7 +29,6 @@ app.use(cookieParser());
 
 //HTTP request logger
 app.use(morgan('tiny'));
-app.use('/', routes);
 
 console.log(__dirname);
 

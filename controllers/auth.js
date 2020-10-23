@@ -60,6 +60,12 @@ exports.login = async (req, res) => {
                 res.cookie('jwt', token, cookieOptions);
                 res.status(200).redirect("/");
             }
+            const token = req.cookies.jwt
+            const decoded = jwt.verify('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoibWFuQGRhbS5kayIsImFkbWluIjoiT3duZXIiLCJpYXQiOjE2MDMyNzU0MzQsImV4cCI6MTYxMTA1MTQzNH0.NjZRKvJE1-IADNRzw-5Lc9TnLJbFuHs1Xw-6N1VGxR8', process.env.JWT_SECRET)
+           //console.log("token is pass: "+decoded.password)
+            console.log("token is userights: "+decoded.admin)
+            console.log("token is email: "+decoded.email)
+            console.log("token is: "+req.cookies.jwt) //testing code, seeing if the cookie/jsonwebtoken works
         });
     } catch (error) {
         console.log(error);

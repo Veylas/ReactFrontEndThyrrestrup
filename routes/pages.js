@@ -4,6 +4,7 @@ const authController = require('../controllers/auth');
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 
+const axios = require('axios');
 const router = express.Router();
 
 
@@ -44,7 +45,10 @@ router.get('/contact', function (req, res, next) {
 
 // fleet is rendered
 router.get('/fleet', authController.isUserOrOwner, authController.fleet, (req, res, next) => {
-    res.render('fleet')
+    axios.get('fleet')
+    .then(response => {
+      res.send(response.data);
+    });
 });
 
 // The router for vehicle is defined, now it can be used to get information to the page

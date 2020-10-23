@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { CookiesProvider } from 'react-cookie';
 import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <CookiesProvider >
+  <App/>
+</CookiesProvider>,
+  /*<React.StrictMode>
+    <App />     Måske virker det her, fixede det som faktisk var fejlen ved cookies
+  </React.StrictMode>,*/
   document.getElementById('root')
 );
 

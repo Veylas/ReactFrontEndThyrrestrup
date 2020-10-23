@@ -11,6 +11,7 @@ import Contact from '../contactPage/ContactCard';
 import ContactUs from '../contactPage/ContactCard';
 import CreateMachine from '../createMachine/CreateMachine';
 import Login from '../Login/LoginForm';
+import FleetVehicles from '../fleet/FleetVehicles';
 //import logo from './logo.png'
 const logo = require('./logoWhite.svg');
 class BootstrapNavbar extends React.Component {
@@ -29,6 +30,7 @@ class BootstrapNavbar extends React.Component {
                                     <Nav className="mr-auto">
                                         <Nav.Link href="/">Home</Nav.Link>
                                         <Nav.Link href="/contact">Contact Us</Nav.Link>
+                                        <Nav.Link href="/fleet">Flåde</Nav.Link>
                                         <Nav.Link href="/contact-us">About Us</Nav.Link>
                                         <Nav.Link href="/login">Login</Nav.Link>
                                         <Nav.Link href="/createMachine">CreateMachine</Nav.Link>
@@ -55,6 +57,10 @@ class BootstrapNavbar extends React.Component {
 
                                 <Route exact path="/login">
                                     <Login />
+                                </Route>
+
+                                <Route exact path="/fleet">
+                                    <FleetVehicles />
                                 </Route>
 
                                 <Route path="/contact">
