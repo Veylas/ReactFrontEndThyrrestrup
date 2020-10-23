@@ -38,13 +38,14 @@ router.get('/login', (req, res) => {
 });
 
 
+
 // contact page is rendered
 router.get('/contact', function (req, res, next) {
     res.render('contact');
 });
 
 // fleet is rendered
-router.get('/fleet', authController.isUserOrOwner, authController.fleet, (req, res, next) => {
+router.get('/fleet', authController.fleet, (req, res, next) => {
     axios.get('fleet')
     .then(response => {
       res.send(response.data);

@@ -254,7 +254,8 @@ exports.editMachineEdit = async (req, res) => {
 
 exports.fleet = async (req, res) => {
     const token = req.cookies.jwt
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const decoded = jwt.verify('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoibWFuQGRhbS5kayIsImhhc2hlZFBhc3N3b3JkIjoiMTIzNDUiLCJhZG1pbiI6Ik93bmVyIiwiaWF0IjoxNjAzNDUyMTg0LCJleHAiOjE2MTEyMjgxODR9.q941_KsfGmFULJLGbHRpHW8QpDDUvXl2lm3CqKSWCAk'
+        , process.env.JWT_SECRET)
     var personID = decoded.id
     var userRights = decoded.admin
 
@@ -319,7 +320,8 @@ exports.fleet = async (req, res) => {
                 }
                 vehicleList.push(vehicle); // everytime the loop goes thorugh one vehicle it wil be pushed to the list
             }
-            res.render('fleet', { "vehicleList": vehicleList })
+            //{ "vehicleDataList": vehicleDataList, "alarms": alarms }
+            res.json(vehicleList)
         }
         });
     });
@@ -463,6 +465,7 @@ exports.authenticate = async (req, res, next) => {
     }*/
 
     exports.isUserOwner = async (req, res, next) => {
+        console.log(req.header)
         const token = req.cookies.jwt
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         if (decoded.admin == 'Owner') {

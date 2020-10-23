@@ -9,7 +9,7 @@ const { signedCookie } = require("cookie-parser");
 const session = require('express-session');
 dotenv.config({ path: './.env'})
 const app = express();
-
+var cors = require('cors');
 const PORT = process.env.PORT || 8080;
 
 var config = ({
@@ -23,6 +23,7 @@ var config = ({
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
 
+app.use(cors())
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
 app.use(cookieParser());
@@ -42,7 +43,6 @@ mssql.connect(config, function (error) {
         console.log("MsSQL Connected...") // log to confirm it connected to database
     }
 })
-
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 //app.use('/', require('./routes/pages'));
