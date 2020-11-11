@@ -27,7 +27,7 @@ exports.login = async (req, res) => {
 
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).render('login')
+            return res.status(400).send('login')
         }
 
         // This query is for login and will check if the email exists in a user
@@ -35,7 +35,7 @@ exports.login = async (req, res) => {
 
             // here we have error handling for the query
             if (!results.recordset[0] || !(await bcrypt.compare(password, (results.recordset[0].password)))) {
-                res.status(401).render('login')
+                res.sendStatus(401)
 
                 // if there's no error and both password and email is correct it will go in this else statement
             } else {
@@ -85,12 +85,12 @@ exports.register = async (req, res) => {
         }
         // if an email is allready used
         if (results.length > 0) {
-            return res.render('register', {
+            return res.send('register', {
                 message: 'That email is already in use' // message is sent to html where it will handle it and show it
             })
             // here the password and confirmPassword is checked if they match
         } else if (password !== passwordConfirm) {
-            return res.render('register', {
+            return res.send('register', {
                 message: 'Passwords do not match' // message is sent to html where it will handle it and show it
             });
         }
@@ -106,10 +106,10 @@ exports.register = async (req, res) => {
                 // logging if an error occurs
                 console.log(error);
             } else {
-                return res.render('register', {
+                return res.redirect('/')  /*, {
                     // This messege will be sent to the html called register and then the html will show it to the user
                     message: 'User registered' // message is sent to html where it will handle it and show it
-                });
+                });*/
             }
         })
     });

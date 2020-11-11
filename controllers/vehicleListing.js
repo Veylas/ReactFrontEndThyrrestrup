@@ -21,8 +21,7 @@ mssql.connect(config, function (err) {
 
 
 exports.fleet = async (req, res) => {
-    console.log(req.headers)
-    const token = req.cookies.jwt
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoibWFuQGRhbS5kayIsImhhc2hlZFBhc3N3b3JkIjoiMTIzNDUiLCJhZG1pbiI6Ik93bmVyIiwiaWF0IjoxNjAzODg0NDI0LCJleHAiOjE2MTE2NjA0MjR9.niJe8_EhHyIRvh3wIrrJ_L9xt38F2EPEvLk2xlR3kxQ'
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     var personID = decoded.id
     var userRights = decoded.admin

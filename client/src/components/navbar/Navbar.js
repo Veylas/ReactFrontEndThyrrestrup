@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Image } from 'react-bootstrap'
 import Home from '../homePage/HomeJumbotron';
+import Register from '../register/RegisterForm';
 import Contact from '../contactPage/ContactCard';
 import ContactUs from '../contactPage/ContactCard';
 import CreateMachine from '../createMachine/CreateMachine';
@@ -29,6 +30,7 @@ class BootstrapNavbar extends React.Component {
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
                                         <Nav.Link href="/">Home</Nav.Link>
+                                        <Nav.Link href="/register">Register</Nav.Link>
                                         <Nav.Link href="/contact">Contact Us</Nav.Link>
                                         <Nav.Link href="/fleet">Flåde</Nav.Link>
                                         <Nav.Link href="/contact-us">About Us</Nav.Link>
@@ -53,6 +55,10 @@ class BootstrapNavbar extends React.Component {
 
                                 <Route exact path="/">
                                     <Home />
+                                </Route>
+
+                                <Route exact path="/register">
+                                    <Register />
                                 </Route>
 
                                 <Route exact path="/login">
